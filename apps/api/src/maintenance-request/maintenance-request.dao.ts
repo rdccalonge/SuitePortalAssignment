@@ -48,4 +48,10 @@ export class MaintenanceRequestDao {
   async getAllMaintenanceRequests(): Promise<MaintenanceRequestDB>{
     return await this.collection.filter({ status: 'open' }).value();
   }
+
+  async closeMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
+    return await this.collection.find({ id })
+    .assign({ status : 'closed' })
+    .write();
+  }
 }
