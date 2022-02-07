@@ -27,3 +27,9 @@ export interface MaintenanceRequest {
   details?: string;
 }
 
+export interface User {
+  // Username of the user
+  username: string;
+  // Password of the user
+  password: string;
+}
