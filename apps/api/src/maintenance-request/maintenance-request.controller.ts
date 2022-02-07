@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, Get, Param, NotFoundException } from '@nestjs/common';
 import { MaintenanceRequest } from '@suiteportal/api-interfaces';
 import { MaintenanceRequestService } from './maintenance-request.service';
 
@@ -31,7 +31,11 @@ export class MaintenanceRequestController {
     if (!id) {
       throw new BadRequestException('No id provided');
     }
-    return await this.maintenanceRequestService.getMaintenanceRequest(id);
+    var result = await this.maintenanceRequestService.getMaintenanceRequest(id);
+      if (!result){
+        throw new NotFoundException('No record was found');
+      }
+      return result;
   }
 
 }
