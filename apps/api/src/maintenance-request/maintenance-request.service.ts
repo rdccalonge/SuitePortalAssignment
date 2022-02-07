@@ -18,4 +18,8 @@ export class MaintenanceRequestService {
   async getMaintenanceRequest(id: string): Promise<MaintenanceRequestDB> {
     return await this.maintReqDao.getMaintenanceRequest(id);
   }
+
+  async getAllMaintenanceRequests(): Promise<MaintenanceRequestDB> {
+    return await this.maintReqDao.getAllMaintenanceRequests();
+  }
 }

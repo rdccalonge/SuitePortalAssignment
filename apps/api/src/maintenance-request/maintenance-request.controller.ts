@@ -11,6 +11,11 @@ export class MaintenanceRequestController {
     //
   }
 
+  @Get('/')
+  public async getAllMaintenanceRequests() {
+    return await this.maintenanceRequestService.getAllMaintenanceRequests();
+  }
+
   @Post('/')
   public async createMaintenanceRequest(
     @Body() maintenanceRequest: MaintenanceRequest,
