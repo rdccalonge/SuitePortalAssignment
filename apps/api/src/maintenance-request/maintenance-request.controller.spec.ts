@@ -61,7 +61,7 @@ describe('MaintenanceRequestController', () => {
   });
 
   it('should throw bad request exception when creating a maintenance request with null summary', async () => {
-    parameter = createMaintenanceRequestParam(null, 'testdetails', 'general');
+    parameter = createMaintenanceRequestParam(null, 'SomeServiceType', 'general');
     mockService.createMaintenanceRequest = jest.fn().mockResolvedValue({id: 2, parameter});
 
     await expect(controller.createMaintenanceRequest(parameter)).rejects.toThrowError(new BadRequestException('Must provide a valid summary'));
@@ -74,12 +74,11 @@ describe('MaintenanceRequestController', () => {
     await expect(controller.createMaintenanceRequest(parameter)).rejects.toThrowError(new BadRequestException('Must provide a valid Service Type'));
   });
   
-  it('should http exception when encountered error when updating', async () => {
+  it('should http exception when encountered error when creating maintenance request', async () => {
+    parameter = createMaintenanceRequestParam('testsummary', 'SomeServiceType', null);
     mockService.createMaintenanceRequest = jest.fn().mockRejectedValue(null)
 
-    await expect(controller.createMaintenanceRequest(createMaintenanceRequestParam())).rejects.toThrowError(new HttpException({
-      message: "Cannot read property 'message' of undefined"
-    }, HttpStatus.BAD_REQUEST));
+    await expect(controller.createMaintenanceRequest(parameter)).rejects.toThrowError(HttpException)
   });
 });
 
