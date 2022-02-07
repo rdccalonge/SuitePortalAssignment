@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Post, Get, Param, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, Get, Param, NotFoundException, HttpException, HttpStatus } from '@nestjs/common';
 import { MaintenanceRequest } from '@suiteportal/api-interfaces';
 import { MaintenanceRequestService } from './maintenance-request.service';
 
@@ -21,7 +21,11 @@ export class MaintenanceRequestController {
     if (!maintenanceRequest?.serviceType) {
       throw new BadRequestException('Must provide a valid Service Type');
     }
-    return await this.maintenanceRequestService.createMaintenanceRequest(maintenanceRequest);
+    return await this.maintenanceRequestService.createMaintenanceRequest(maintenanceRequest).catch(err => {
+      throw new HttpException({
+        message: err.message
+      }, HttpStatus.BAD_REQUEST);
+    });
   }
 
   @Get('/:id')
