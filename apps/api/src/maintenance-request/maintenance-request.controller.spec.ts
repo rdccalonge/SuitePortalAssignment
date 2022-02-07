@@ -80,6 +80,21 @@ describe('MaintenanceRequestController', () => {
 
     await expect(controller.createMaintenanceRequest(parameter)).rejects.toThrowError(HttpException)
   });
+
+  // get all maintenance requests
+  it('should return all maintenance requests', async () => {
+    const expected = [
+      { id: '1', summary: 'test' },
+      { id: '2', summary: 'test' }
+    ];
+    mockService.getAllMaintenanceRequests = jest.fn().mockResolvedValue(expected);
+
+    const result = await controller.getAllMaintenanceRequests();
+
+    var records = Object.keys(result);
+    expect(mockService.getAllMaintenanceRequests).toHaveBeenCalled();
+    expect(records.length).toBe(2);
+  });
 });
 
 function createMaintenanceRequestParam(summary: string = null, details: string = null, serviceType: string = null): any {

@@ -27,6 +27,17 @@ describe('MaintenanceRequestDao', () => {
         const result = await service.getMaintenanceRequest('1');
       expect(result.id).toEqual('1');
     });
+
+    it('should get all records', async () => {
+      const expected = [
+          {id: '1'},
+          {id: '2'}
+      ]
+      dao.getAllMaintenanceRequests = jest.fn().mockResolvedValue(expected)
+      const result = await service.getAllMaintenanceRequests();
+      const obj = Object(result);
+    expect(obj.length).toEqual(2);
+  });
   });
 
 function createMaintenanceRequest(summary: string = null, details: string = null, serviceType: string = null): any {
