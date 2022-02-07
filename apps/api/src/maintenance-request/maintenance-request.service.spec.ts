@@ -37,12 +37,18 @@ describe('MaintenanceRequestDao', () => {
       const result = await service.getAllMaintenanceRequests();
       const obj = Object(result);
     expect(obj.length).toEqual(2);
-  });
+    });
+
+    it('should return updated record', async () => {
+      dao.closeMaintenanceRequest = jest.fn().mockResolvedValue({id: '1', status: 'closed'})
+      const result = await service.closeMaintenanceRequest('1');
+      expect(result.status).toEqual('closed');
+    });
   });
 
 function createMaintenanceRequest(summary: string = null, details: string = null, serviceType: string = null): any {
     return ({
-      name: 'John',
+      name: 'John Doe',
       email: 'john.doe@yopmail.com',
       unitNumber: '2AB',
       serviceType: serviceType ,

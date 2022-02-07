@@ -95,6 +95,38 @@ describe('MaintenanceRequestController', () => {
     expect(mockService.getAllMaintenanceRequests).toHaveBeenCalled();
     expect(records.length).toBe(2);
   });
+
+  // close maintenance request
+  it('should return updated values when closing valid request', async () => {
+    mockService.getMaintenanceRequest = jest.fn().mockResolvedValue({ id: '1', status: 'open' });
+    mockService.closeMaintenanceRequest = jest.fn().mockResolvedValue({ id: '1', status: 'closed' });
+
+    const result = await controller.closeMaintenanceRequest('1');
+    
+    expect(mockService.closeMaintenanceRequest).toHaveBeenCalled();
+    expect(result.status).toBe('closed');
+  });
+
+  it('should throw bad request exception when id is null', async () => {
+    mockService.closeMaintenanceRequest = jest.fn().mockResolvedValue({ id: '1', summary: 'test' })
+
+    await expect(controller.closeMaintenanceRequest(null)).rejects.toThrowError(new BadRequestException('No id provided'));
+  });
+
+  it('should throw not found exception when record is not found', async () => {
+    mockService.getMaintenanceRequest = jest.fn().mockResolvedValue(null)
+
+    await expect(controller.closeMaintenanceRequest('1')).rejects.toThrowError(new NotFoundException('No record was found'));
+  });
+
+  it('should http exception when encountered error when updating', async () => {
+    mockService.getMaintenanceRequest = jest.fn().mockResolvedValue({ id: '1', status: 'open' });
+    mockService.closeMaintenanceRequest = jest.fn().mockRejectedValue(undefined)
+
+    await expect(controller.closeMaintenanceRequest('1')).rejects.toThrowError(new HttpException({
+      message: "Cannot read property 'message' of undefined"
+    }, HttpStatus.BAD_REQUEST));
+  });
 });
 
 function createMaintenanceRequestParam(summary: string = null, details: string = null, serviceType: string = null): any {
