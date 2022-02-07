@@ -7,6 +7,7 @@ import * as nanoid from 'nanoid';
 export interface MaintenanceRequestDB extends MaintenanceRequest {
   id: string;
   submittedAt: Date;
+  status: string
 }
 
 export interface MaintenanceRequestData {
@@ -36,6 +37,7 @@ export class MaintenanceRequestDao {
         ...id,
         ...maintenanceRequest,
         submittedAt: new Date(),
+        status: 'open'
       })
       .write()
     return id;
