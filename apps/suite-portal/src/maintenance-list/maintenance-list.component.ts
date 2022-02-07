@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
+import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
+import { DialogComponent, DialogModel } from "../app/dialog/dialog.component";
 import { MaintenanceService } from "../services/maintenance.service";
 
 @Component({
@@ -28,6 +30,7 @@ import { MaintenanceService } from "../services/maintenance.service";
 
     constructor(
       private maintService: MaintenanceService,
+      private dialog: MatDialog
       ) {}
     
     ngOnInit() {
@@ -47,4 +50,22 @@ import { MaintenanceService } from "../services/maintenance.service";
       this.refresh();
       });
     }
+
+    confirmDialog(id: string): void {
+      const message = `This will close the open maintenance request. It wil no longer appear in your list.`;
+    
+      const dialogData = new DialogModel("Close this request?", message);
+    
+      const dialogRef = this.dialog.open(DialogComponent, {
+          maxWidth: "400px",
+          data: dialogData
+      });
+    
+      dialogRef.afterClosed().subscribe(dialogResult => {
+          this.result = dialogResult;
+          if (this.result){
+            this.closeRequest(id);
+          }
+      });
+      }
     }
