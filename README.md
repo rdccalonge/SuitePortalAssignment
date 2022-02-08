@@ -109,3 +109,10 @@ Libraries are sharable across libraries and applications. They can be imported f
 
 Visit the [Nx Documentation](https://nx.dev) to learn more.
 
+## Additional Instructions
+
+Admin Credentials
+> Username: superadmin
+> Password: 123456
+
+Run `npx nx e2e suite-portal-e2e` to execute e2e test with Cypress
