@@ -4,15 +4,18 @@ import { seedDatabase} from "../../../database";
 describe('MaintenanceRequestDao', () => {
     let dao: MaintenanceRequestDao;
     
-    beforeEach(async () => {
-      seedDatabase();
+    beforeAll(async () => {
       const app = await Test.createTestingModule({
         providers: [MaintenanceRequestDao],
       }).compile();
-        
+      seedDatabase();
       dao = app.get<MaintenanceRequestDao>(MaintenanceRequestDao);
     });
-      
+    
+    afterAll(async() => {
+      seedDatabase();
+    })
+    
     it('should return valid request', async () => {
          const result = await dao.getMaintenanceRequest('Test1');
          
@@ -36,12 +39,18 @@ describe('MaintenanceRequestDao', () => {
     });
 
     it('should return new id', async () => {
-      const result = await dao.insertNewRequest(createMaintenanceRequestParam());
+      const result = await dao.insertNewRequest(createMaintenanceRequestParam("Summary Test", "Details Test", "ServiceType Test"));
 
       expect(result).not.toBeNull();
-      expect(result.id.length).toBeGreaterThan(0);
+      expect(result.id).not.toBeNull()
     });
 
+    it('should return updated status', async () => {
+      const result = await dao.closeMaintenanceRequest("Test1");
+
+      expect(result).not.toBeNull();
+      expect(result.status).toEqual('closed');
+    });
 });
 function createMaintenanceRequestParam(summary: string = null, details: string = null, serviceType: string = null): any {
     return ({

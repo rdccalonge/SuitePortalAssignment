@@ -21,17 +21,6 @@
       "details": "Need to cover the crack within the pump",
       "submittedAt": "2022-02-07T17:13:25.616Z",
       "status": "open"
-    },
-    {
-      "id": "P-zCygcIoL",
-      "name": "John",
-      "email": "john.doe@yopmail.com",
-      "unitNumber": "2AB",
-      "serviceType": null,
-      "summary": null,
-      "details": null,
-      "submittedAt": "2022-02-08T10:32:43.924Z",
-      "status": "open"
     }
   ]
 }
