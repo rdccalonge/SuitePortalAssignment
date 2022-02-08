@@ -43,7 +43,7 @@
             <textarea matInput formControlName="details"></textarea>
           </mat-form-field>
 
-          <button mat-raised-button color="accent"  type="submit">
+          <button mat-raised-button color="accent"  [disabled]="!maintForm.valid" type="submit">
             Submit
           </button>
         </form>
