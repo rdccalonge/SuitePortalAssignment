@@ -18,7 +18,7 @@ const DATABASE_NAME = process.env.NODE_ENV === 'test' ? './db/test-db.json' : '.
 const adapter = new FileSync<MaintenanceRequestDB>(DATABASE_NAME)
 const db = low(adapter)
 
-db.defaults({ requests: [] }).write();
+db.defaults({ requests: [],  users: [ {'username': 'superadmin', 'password': '123456', 'id': '1', 'name' : 'Super Admin'}]  }).write();
 
 @Injectable()
 export class MaintenanceRequestDao {
