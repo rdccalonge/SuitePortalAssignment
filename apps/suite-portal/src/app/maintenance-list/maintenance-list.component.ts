@@ -3,8 +3,8 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTableDataSource } from "@angular/material/table";
-import { DialogComponent, DialogModel } from "../app/dialog/dialog.component";
-import { MaintenanceService } from "../services/maintenance.service";
+import { DialogComponent, DialogModel } from "../dialog/dialog.component";
+import { MaintenanceService } from "../../services/maintenance.service";
 
 @Component({
     selector: 'pm-maintenance-list',
