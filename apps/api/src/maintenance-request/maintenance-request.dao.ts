@@ -14,7 +14,8 @@ export interface MaintenanceRequestData {
   requests: MaintenanceRequestDB[];
 }
 
-const adapter = new FileSync<MaintenanceRequestDB>('./db/maint-requests.json')
+const DATABASE_NAME = process.env.NODE_ENV === 'test' ? './db/test-db.json' : './db/maint-requests.json'
+const adapter = new FileSync<MaintenanceRequestDB>(DATABASE_NAME)
 const db = low(adapter)
 
 db.defaults({ requests: [] }).write();
@@ -47,7 +48,7 @@ export class MaintenanceRequestDao {
     return await this.collection.find({ id }).value();
   }
 
-  async getAllMaintenanceRequests(): Promise<MaintenanceRequestDB>{
+  async getOpenMaintenanceRequests(): Promise<MaintenanceRequestDB>{
     return await this.collection.filter({ status: 'open' }).value();
   }
 

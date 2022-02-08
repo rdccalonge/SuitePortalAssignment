@@ -12,8 +12,8 @@ export class MaintenanceRequestController {
   }
 
   @Get('/')
-  public async getAllMaintenanceRequests() {
-    return await this.maintenanceRequestService.getAllMaintenanceRequests();
+  public async getOpenMaintenanceRequests() {
+    return await this.maintenanceRequestService.getOpenMaintenanceRequests();
   }
 
   @Post('/')

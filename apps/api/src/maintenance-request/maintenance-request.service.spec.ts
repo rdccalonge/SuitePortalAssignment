@@ -33,8 +33,8 @@ describe('MaintenanceRequestService', () => {
           {id: '1'},
           {id: '2'}
       ]
-      dao.getAllMaintenanceRequests = jest.fn().mockResolvedValue(expected)
-      const result = await service.getAllMaintenanceRequests();
+      dao.getOpenMaintenanceRequests = jest.fn().mockResolvedValue(expected)
+      const result = await service.getOpenMaintenanceRequests();
       const obj = Object(result);
     expect(obj.length).toEqual(2);
     });

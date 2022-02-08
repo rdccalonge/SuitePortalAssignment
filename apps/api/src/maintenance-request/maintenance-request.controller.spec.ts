@@ -87,12 +87,12 @@ describe('MaintenanceRequestController', () => {
       { id: '1', summary: 'test' },
       { id: '2', summary: 'test' }
     ];
-    mockService.getAllMaintenanceRequests = jest.fn().mockResolvedValue(expected);
+    mockService.getOpenMaintenanceRequests = jest.fn().mockResolvedValue(expected);
 
-    const result = await controller.getAllMaintenanceRequests();
+    const result = await controller.getOpenMaintenanceRequests();
 
     var records = Object.keys(result);
-    expect(mockService.getAllMaintenanceRequests).toHaveBeenCalled();
+    expect(mockService.getOpenMaintenanceRequests).toHaveBeenCalled();
     expect(records.length).toBe(2);
   });
 
