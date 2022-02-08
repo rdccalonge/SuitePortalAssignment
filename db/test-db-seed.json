@@ -1,0 +1,26 @@
+{
+  "requests": [
+    {
+      "id": "Test1",
+      "name": "Reni Calonge",
+      "email": "rdccalonge@gmail.com",
+      "unitNumber": "1A",
+      "serviceType": "general",
+      "summary": "General Cleaning",
+      "details": "Clean all rooms",
+      "submittedAt": "2022-02-07T17:12:43.568Z",
+      "status": "closed"
+    },
+    {
+      "id": "Test2",
+      "name": "John Doe",
+      "email": "johndoe@yopmail.com",
+      "unitNumber": "1B",
+      "serviceType": "plumbing",
+      "summary": "Fix Water Pump",
+      "details": "Need to cover the crack within the pump",
+      "submittedAt": "2022-02-07T17:13:25.616Z",
+      "status": "open"
+    }
+  ]
+}

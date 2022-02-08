@@ -3,7 +3,7 @@ import { Test } from '@nestjs/testing';
 import { MaintenanceRequestService } from './maintenance-request.service';
 import { MaintenanceRequestDao } from './maintenance-request.dao';
 
-describe('MaintenanceRequestDao', () => {
+describe('MaintenanceRequestService', () => {
   let service: MaintenanceRequestService;
   let dao: MaintenanceRequestDao;
 
