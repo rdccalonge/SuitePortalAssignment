@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../guards/auth-guard';
 import { MaintenanceListComponent } from '../maintenance-list/maintenance-list.component';
 import { MaintenanceListModule } from '../maintenance-list/maintenance-list.module';
 import { AdminComponent } from './admin/admin.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'maintenance-list',
+    canActivate: [ AuthGuard ],
     component: MaintenanceListComponent,
   },
   {
